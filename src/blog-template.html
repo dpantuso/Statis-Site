@@ -6,6 +6,7 @@
     <title>{{title}} - Part-Time YouTuber Academy</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/blog.css">
+    <link rel="stylesheet" href="/css/contact.css">
 </head>
 <body>
     <nav>
@@ -19,6 +20,7 @@
                 <a href="/blog">Blog</a>
                 <a href="/about">About</a>
                 <a href="/faq">FAQ</a>
+                <a href="/contact">Contact</a>
                 <a href="/login" class="login-btn">Course Login</a>
             </div>
         </div>
@@ -52,7 +54,18 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Part-Time YouTuber Academy. All rights reserved.</p>
+        <div class="footer-newsletter">
+            <h3>Stay Updated</h3>
+            <p>Get weekly YouTube tips and strategies delivered to your inbox.</p>
+            <form action="/subscribe" method="post" class="footer-form">
+                <div class="footer-form-fields">
+                    <input type="email" name="email_address" placeholder="Your email address" required class="footer-input">
+                    <button type="submit" class="footer-submit">Subscribe</button>
+                </div>
+                <small class="footer-privacy">We respect your privacy. Unsubscribe at any time.</small>
+            </form>
+        </div>
+        <p class="footer-copyright">&copy; 2024 Part-Time YouTuber Academy. All rights reserved.</p>
     </footer>
 
     <script src="/js/main.js"></script>

@@ -1,10 +1,17 @@
+require('dotenv').config();
+
 const express = require('express');
 const { marked } = require('marked');
 const fs = require('fs').promises;
 const path = require('path');
+const axios = require('axios');
 
 const app = express();
 const PORT = 3000;
+
+// Add body parser for form data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Serve static files from the public directory
 app.use(express.static('public'));
@@ -161,6 +168,19 @@ app.get('/academy', async (req, res) => {
     }
 });
 
+app.get('/contact', async (req, res) => {
+    try {
+        const html = await renderPage(path.join(__dirname, 'src/pages/contact.md'), 'Contact');
+        res.send(html);
+    } catch (error) {
+        if (error.message === 'Page not found') {
+            res.status(404).send('Page not found');
+        } else {
+            res.status(500).send('Error loading page');
+        }
+    }
+});
+
 // Blog post route
 app.get('/blog/:slug', async (req, res) => {
     try {
@@ -176,6 +196,32 @@ app.get('/blog/:slug', async (req, res) => {
         } else {
             res.status(500).send('Error loading blog post');
         }
+    }
+});
+
+// ConvertKit form submission
+app.post('/subscribe', async (req, res) => {
+    const { email_address, first_name } = req.body;
+    const CONVERTKIT_API_KEY = process.env.CONVERTKIT_API_KEY;
+    const FORM_ID = process.env.CONVERTKIT_FORM_ID;
+
+    try {
+        const response = await axios.post(
+            `https://api.convertkit.com/v3/forms/${FORM_ID}/subscribe`,
+            {
+                api_key: CONVERTKIT_API_KEY,
+                email: email_address,
+                first_name: first_name
+            }
+        );
+
+        res.json({ success: true, message: 'Successfully subscribed!' });
+    } catch (error) {
+        console.error('ConvertKit API Error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error subscribing to newsletter' 
+        });
     }
 });
 

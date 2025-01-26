@@ -1,0 +1,94 @@
+/* ConvertKit Form Styles */
+.convertkit-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formkit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formkit-field {
+    margin-bottom: 1rem;
+}
+
+.formkit-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.formkit-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.formkit-submit {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.formkit-submit:hover {
+    transform: translateY(-2px);
+    background: var(--gradient-middle);
+}
+
+.formkit-guarantee {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* Success Message */
+.formkit-alert-success {
+    background: #c6f6d5;
+    color: #2f855a;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Error Message */
+.formkit-alert-error {
+    background: #fed7d7;
+    color: #c53030;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Loading State */
+.formkit-submit[data-active] {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .convertkit-form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .formkit-input,
+    .formkit-submit {
+        padding: 0.8rem;
+    }
+} 
