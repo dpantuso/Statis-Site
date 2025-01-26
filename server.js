@@ -27,7 +27,7 @@ async function ensureDirectories() {
 // Read and parse template
 async function getTemplate() {
     try {
-        const template = await fs.readFile(path.join(__dirname, 'src/template.html'), 'utf-8');
+        const template = await fs.readFile(path.join(__dirname, 'src/blog-template.html'), 'utf-8');
         return template;
     } catch (error) {
         console.error('Error reading template:', error);
@@ -35,16 +35,59 @@ async function getTemplate() {
     }
 }
 
+// Get recent blog posts
+async function getRecentPosts(currentPost = '') {
+    try {
+        const files = await fs.readdir(path.join(__dirname, 'src/blog'));
+        const posts = [];
+        
+        for (const file of files.slice(0, 5)) {
+            if (file.endsWith('.md') && file !== currentPost) {
+                const content = await fs.readFile(path.join(__dirname, 'src/blog', file), 'utf-8');
+                const title = content.split('\n')[0].replace('# ', '');
+                const slug = file.replace('.md', '');
+                posts.push(`<li><a href="/blog/${slug}">${title}</a></li>`);
+            }
+        }
+        
+        return `<ul>${posts.join('\n')}</ul>`;
+    } catch (error) {
+        console.error('Error getting recent posts:', error);
+        return '<ul><li>No recent posts</li></ul>';
+    }
+}
+
+// Get blog categories
+function getCategories() {
+    return `
+    <ul>
+        <li><a href="/blog/category/strategy">Strategy & Planning</a></li>
+        <li><a href="/blog/category/technical">Technical Skills</a></li>
+        <li><a href="/blog/category/growth">Growth & Monetization</a></li>
+        <li><a href="/blog/category/success">Success Stories</a></li>
+    </ul>`;
+}
+
 // Convert markdown to HTML and inject into template
-async function renderPage(markdownPath, title) {
+async function renderPage(markdownPath, title, isBlogPost = false) {
     try {
         const template = await getTemplate();
         const markdown = await fs.readFile(markdownPath, 'utf-8');
         const content = marked(markdown);
         
-        return template
-            .replace('{{title}}', title)
-            .replace('{{content}}', content);
+        let html = template.replace('{{title}}', title)
+                          .replace('{{content}}', content);
+
+        // Add meta, recent posts, and categories for blog posts
+        const meta = isBlogPost ? markdown.split('\n')[1] : '';
+        const recentPosts = await getRecentPosts(isBlogPost ? path.basename(markdownPath) : '');
+        const categories = getCategories();
+        
+        html = html.replace('{{meta}}', meta)
+                   .replace('{{recent_posts}}', recentPosts)
+                   .replace('{{categories}}', categories);
+        
+        return html;
     } catch (error) {
         console.error('Error rendering page:', error);
         if (error.code === 'ENOENT') {
@@ -57,14 +100,12 @@ async function renderPage(markdownPath, title) {
 // Routes
 app.get('/', async (req, res) => {
     try {
-        const html = await renderPage(path.join(__dirname, 'src/pages/index.md'), 'Home');
-        res.send(html);
+        const indexPath = path.join(__dirname, 'src/index.html');
+        const content = await fs.readFile(indexPath, 'utf-8');
+        res.send(content);
     } catch (error) {
-        if (error.message === 'Page not found') {
-            res.status(404).send('Page not found');
-        } else {
-            res.status(500).send('Error loading page');
-        }
+        console.error('Error serving index:', error);
+        res.status(500).send('Error loading home page');
     }
 });
 
@@ -107,12 +148,26 @@ app.get('/faq', async (req, res) => {
     }
 });
 
+app.get('/academy', async (req, res) => {
+    try {
+        const html = await renderPage(path.join(__dirname, 'src/pages/academy.md'), 'Academy');
+        res.send(html);
+    } catch (error) {
+        if (error.message === 'Page not found') {
+            res.status(404).send('Page not found');
+        } else {
+            res.status(500).send('Error loading page');
+        }
+    }
+});
+
 // Blog post route
 app.get('/blog/:slug', async (req, res) => {
     try {
         const html = await renderPage(
             path.join(__dirname, `src/blog/${req.params.slug}.md`),
-            req.params.slug.replace(/-/g, ' ')
+            req.params.slug.replace(/-/g, ' '),
+            true // This is a blog post
         );
         res.send(html);
     } catch (error) {

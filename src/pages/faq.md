@@ -1,38 +1,76 @@
 # Frequently Asked Questions
 
-## What technologies does this site use?
-This site is built with simple, standard web technologies: HTML, CSS, and JavaScript. Content is written in Markdown and converted to HTML on the server. No complex frameworks or build tools are needed.
+## About the Academy
 
-## How can I create a similar site?
-You can create a similar site by:
-1. Setting up a basic Node.js server
-2. Using Express for routing
-3. Writing content in Markdown
-4. Using a markdown converter (like `marked`)
-5. Applying simple CSS for styling
+### What is Part-Time YouTuber Academy?
+We're an online education platform specifically designed for people who want to build successful YouTube channels while maintaining their full-time jobs or other commitments.
 
-The source code is available on my GitHub repository.
+### Who is this academy for?
+The academy is perfect for:
+- Professionals wanting to share their expertise
+- Hobbyists looking to monetize their passion
+- Anyone interested in building a YouTube presence while keeping their day job
+- Existing creators wanting to optimize their workflow
 
-## Why not use a framework like Next.js or Gatsby?
-While these frameworks are powerful, they can be overkill for simple sites. This approach demonstrates that you can build a modern, responsive website with basic web technologies.
+### How much time do I need to commit?
+Our programs are designed to work with busy schedules. Most students spend 5-10 hours per week on their YouTube channel. We teach you efficient workflows to maximize your limited time.
 
-## How is the content managed?
-Content is written in Markdown files and stored in the project directory. This makes it easy to:
-- Write and edit content
-- Version control with Git
-- Deploy without a database
-- Maintain without a CMS
+## Course Content
 
-## Can I contribute or suggest improvements?
-Absolutely! Feel free to:
-- Open issues on GitHub
-- Submit pull requests
-- Send suggestions via email
-- Share your own experiences
+### What will I learn?
+Our comprehensive curriculum covers:
+- Channel strategy and niche selection
+- Efficient content planning and batching
+- Video production and editing techniques
+- SEO and thumbnail optimization
+- Audience growth strategies
+- Monetization methods
+- Time management for creators
 
-## How do I get in touch?
-You can reach me through:
-- The contact form
-- Email
-- Social media profiles
-- GitHub issues 
+### Are the courses self-paced?
+Yes! All course content is available on-demand, allowing you to learn at your own pace and fit the lessons into your schedule.
+
+### Do you provide personal feedback?
+Yes! All students receive:
+- Personal channel reviews
+- Video critique sessions
+- Access to live Q&A calls
+- Community feedback
+
+## Technical Requirements
+
+### What equipment do I need?
+To start, you only need:
+- A smartphone with a decent camera
+- Basic computer for editing
+- Internet connection
+We'll guide you on upgrading your setup as your channel grows.
+
+### Do I need video editing experience?
+No! We teach editing from the ground up, focusing on efficient workflows for busy creators.
+
+## Support & Community
+
+### Is there ongoing support?
+Absolutely! You'll get:
+- Access to our private community
+- Weekly live Q&A sessions
+- Technical support
+- Networking opportunities
+
+### How long do I have access to the course?
+You get lifetime access to all course materials, including future updates.
+
+## Getting Started
+
+### How do I enroll?
+Click the [Enroll Now](/academy) button to view our available programs and start your YouTube journey.
+
+### What if I'm not satisfied?
+We offer a 30-day money-back guarantee. If you're not completely satisfied, we'll refund your investment.
+
+### Can I upgrade later?
+Yes! We offer different tiers of membership, and you can upgrade anytime to access more features and support.
+
+## Still Have Questions?
+Contact our team at [support@ptyoutuber.academy](mailto:support@ptyoutuber.academy) or schedule a [consultation call](/consultation). 
